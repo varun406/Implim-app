@@ -95,19 +95,19 @@ android {
     flavorDimensions "default"
     productFlavors {
         dev {
-            resValue "string", "build_config_package", "com.boilerplate"
+            resValue "string", "build_config_package", "com.implim"
         }
         uat {
-            resValue "string", "build_config_package", "com.boilerplate"
+            resValue "string", "build_config_package", "com.implim"
         }
         prod {
-            resValue "string", "build_config_package", "com.boilerplate"
+            resValue "string", "build_config_package", "com.implim"
         }
     }
 
     namespace "com.boilerplate"
     defaultConfig {
-        applicationId "com.boilerplate"
+        applicationId "com.implim"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -138,6 +138,8 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    implementation("androidx.credentials:credentials:1.5.0") // Google Credential Manager API
+    implementation("androidx.credentials:credentials-play-services-auth:1.5.0")
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
