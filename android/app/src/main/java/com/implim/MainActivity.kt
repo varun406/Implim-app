@@ -1,4 +1,4 @@
-package com.boilerplate
+package com.implim
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity

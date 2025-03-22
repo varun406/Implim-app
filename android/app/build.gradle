@@ -105,7 +105,7 @@ android {
         }
     }
 
-    namespace "com.boilerplate"
+    namespace "com.implim"
     defaultConfig {
         applicationId "com.implim"
         minSdkVersion rootProject.ext.minSdkVersion

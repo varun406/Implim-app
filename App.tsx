@@ -5,11 +5,10 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import RootNavigator from './src/navigators/RootNavigator';
 import {persistor, store} from './src/redux/store';
+import Config from 'react-native-config';
 
 function App(): React.JSX.Element {
   const colorScheme = Appearance.getColorScheme();
-
-  console.log('>>', colorScheme);
 
   return (
     <Provider store={store}>
