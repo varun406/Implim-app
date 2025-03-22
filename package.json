@@ -9,12 +9,15 @@
     "start": "react-native start",
     "test": "jest",
     "android-clear": "cd android && gradlew clean",
-    "dev:android": "cross-env ENVFILE=environments/.env.dev  react-native run-android --mode=devDebug",
-    "uat:android": "cross-env ENVFILE=environments/.env.uat  react-native run-android --mode=uatDebug",
-    "prod:android": "cross-env ENVFILE=environments/.env.prod  react-native run-android --mode=prodDebug",
-    "dev:android-build": "cross-env ENVFILE=environments/.env.dev --mode=devRelease cd android && gradlew assembleRelease",
-    "uat:android-build": "cross-env ENVFILE=environments/.env.uat --mode=uatRelease cd android && gradlew assembleRelease",
-    "prod:android-build": "cross-env ENVFILE=environments/.env.prod --mode=prodRelease cd android && gradlew assembleRelease"
+    "dev:android": "cross-env ENVFILE=environments/.env.dev react-native run-android --mode=devDebug",
+    "uat:android": "cross-env ENVFILE=environments/.env.uat react-native run-android --mode=uatDebug",
+    "prod:android": "cross-env ENVFILE=environments/.env.prod react-native run-android --mode=prodDebug",
+    "dev:android-build": "cd android && cross-env ENVFILE=environments/.env.dev --mode=devRelease gradlew assembleRelease",
+    "uat:android-build": "cd android && cross-env ENVFILE=environments/.env.uat --mode=uatRelease gradlew assembleRelease",
+    "prod:android-build": "cd android && cross-env ENVFILE=environments/.env.prod --mode=prodRelease gradlew assembleRelease",
+    "dev:android-debugBuild": "cd android && cross-env ENVFILE=environments/.env.dev --mode=devRelease gradlew assembleDebug",
+    "uat:android-debugBuild": "cd android && cross-env ENVFILE=environments/.env.uat --mode=uatRelease gradlew assembleDebug",
+    "prod:android-debugBuild": "cd android && cross-env ENVFILE=environments/.env.prod --mode=prodRelease gradlew assembleDebug"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.2.1",
