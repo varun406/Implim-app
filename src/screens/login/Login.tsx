@@ -16,8 +16,7 @@ const Login = () => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId:
-        '855508307114-nmdbtqdlk60o0uclkpcv2f4hn92phjrb.apps.googleusercontent.com', // client ID of type WEB for your server. Required to get the `idToken` on the user object, and for offline access.
+      webClientId: Config.GOOGLE_CLIENT_ID, // client ID of type WEB for your server. Required to get the `idToken` on the user object, and for offline access.
     });
   }, []);
 
