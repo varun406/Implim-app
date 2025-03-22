@@ -17,6 +17,9 @@
     "prod:android-build": "cross-env ENVFILE=environments/.env.prod --mode=prodRelease cd android && gradlew assembleRelease"
   },
   "dependencies": {
+    "@react-native-firebase/analytics": "^21.12.1",
+    "@react-native-firebase/app": "^21.12.1",
+    "@react-native-google-signin/google-signin": "^13.2.0",
     "@react-navigation/bottom-tabs": "^7.2.1",
     "@react-navigation/drawer": "^7.1.2",
     "@react-navigation/native": "^7.0.15",
