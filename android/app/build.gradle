@@ -5,7 +5,7 @@ apply plugin: "com.facebook.react"
 
 project.ext.envConfigFiles = [
     debug: ".env.dev",
-    release: ".env.prod",
+    release: ".env.dev",
     devDebug: ".env.dev",
     uatDebug: ".env.uat",
     prodDebug: ".env.prod",
@@ -138,6 +138,8 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    implementation(platform("com.google.firebase:firebase-bom:33.11.0"))
+    implementation('com.google.android.gms:play-services-auth:20.7.0')
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
@@ -145,3 +147,5 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

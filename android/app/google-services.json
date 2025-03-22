@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "855508307114",
+    "project_id": "implim-d84f6",
+    "storage_bucket": "implim-d84f6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855508307114:android:e1577ece647d92de7fd4d3",
+        "android_client_info": {
+          "package_name": "com.implim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855508307114-nmdbtqdlk60o0uclkpcv2f4hn92phjrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3jQSFgg83ckS4qca_fG9Umq-7kyGbuRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855508307114-nmdbtqdlk60o0uclkpcv2f4hn92phjrb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
