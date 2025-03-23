@@ -1,18 +1,19 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Platform, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {useAppDispatch} from '../../redux/store';
-import {setUserLogin} from '../../redux/user/userSlice';
+import {addUsername, setUserLogin} from '../../redux/user/userSlice';
 import {
   GoogleSignin,
   isErrorWithCode,
   isSuccessResponse,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+import {AuthConfiguration, authorize} from 'react-native-app-auth';
 import Config from 'react-native-config';
 
 const Login = () => {
   const dispatch = useAppDispatch();
-  console.log('>>', Config);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -24,15 +25,27 @@ const Login = () => {
     dispatch(setUserLogin(true));
   };
 
-  const signIn = async () => {
+  const onGoogleSignIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
+        let idToken = null;
         console.log(response.data);
-        // dispatch(setUserLogin(true));
+        // Try the new style of google-sign in result, from v13+ of that module
+        idToken = response.data?.idToken;
+        if (!idToken) {
+          // if you are using older versions of google-signin, try old style result
+          idToken = response?.idToken;
+        }
+        if (!idToken) {
+          throw new Error('No ID token found');
+        }
+        dispatch(addUsername(response.data.user.name));
+        dispatch(setUserLogin(true));
       } else {
         // sign in was cancelled by user
+        console.log('sign in was cancelled by user', response.data);
       }
     } catch (error) {
       if (isErrorWithCode(error)) {
@@ -56,10 +69,40 @@ const Login = () => {
     }
   };
 
+  const onMicrosoftSignIn = async () => {
+    const config: AuthConfiguration = {
+      serviceConfiguration: {
+        authorizationEndpoint: `https://login.microsoftonline.com/${Config.TENANT_ID}/oauth2/v2.0/authorize`,
+        tokenEndpoint: `https://login.microsoftonline.com/${Config.TENANT_ID}/oauth2/v2.0/token`,
+      },
+      clientId: Config.CLIENT_ID || '',
+      redirectUrl:
+        Platform.OS == 'android'
+          ? 'com.implim://com.implim/android/callback'
+          : 'com.implim://com.implim/ios/callback',
+      scopes: ['openid', 'profile', 'email', 'offline_access'],
+      connectionTimeoutSeconds: 5,
+    };
+
+    console.log('>>', config);
+
+    try {
+      // Log in to get an authentication token
+      const authState = await authorize(config);
+      console.log('>>', authState);
+    } catch (error) {
+      console.log('>>>ERROR', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Button title="Login" onPress={login} />
-      <Button title="Login with google" onPress={signIn} />
+      <Button title="Login with google" onPress={onGoogleSignIn} />
+      <Button
+        title="Login with microsoft"
+        onPress={() => onMicrosoftSignIn()}
+      />
     </View>
   );
 };

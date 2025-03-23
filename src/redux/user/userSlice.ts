@@ -3,7 +3,7 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 
 // Define a type for the slice state
 interface UserState {
-  username: string;
+  username: string | null;
   isLoggedIn: boolean;
 }
 
@@ -17,15 +17,18 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    addUsername: (state, action: PayloadAction<string>) => {
+    addUsername: (state, action: PayloadAction<string | null>) => {
       state.username = action.payload;
     },
     setUserLogin: (state, action) => {
       state.isLoggedIn = action.payload;
     },
+    logout: () => {
+      return initialState;
+    },
   },
 });
 
-export const {addUsername, setUserLogin} = userSlice.actions;
+export const {addUsername, setUserLogin, logout} = userSlice.actions;
 
 export default userSlice.reducer;

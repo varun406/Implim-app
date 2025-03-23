@@ -5,13 +5,16 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {useAppDispatch} from '../../redux/store';
-import {setUserLogin} from '../../redux/user/userSlice';
+import {logout, setUserLogin} from '../../redux/user/userSlice';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const CustomDrawer = props => {
   const dispatch = useAppDispatch();
 
-  const logout = () => {
-    dispatch(setUserLogin(false));
+  const handlelogout = async () => {
+    await GoogleSignin.revokeAccess(); // Clear account selection cache
+    await GoogleSignin.signOut(); // Sign out from Google
+    dispatch(logout());
   };
 
   return (
@@ -23,7 +26,7 @@ const CustomDrawer = props => {
           <DrawerItemList {...props} />
         </View>
         <View style={{marginTop: 'auto'}}>
-          <Button title="Logout" onPress={logout} />
+          <Button title="Logout" onPress={handlelogout} />
         </View>
       </DrawerContentScrollView>
     </View>
