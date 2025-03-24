@@ -7,4 +7,5 @@ export default {
   Login: 'Login',
   About: 'About',
   Settings: 'Settings',
+  Dashboard: 'Dashboard',
 };
